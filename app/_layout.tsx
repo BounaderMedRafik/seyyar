@@ -1,22 +1,51 @@
-import { useEffect } from 'react';
-import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import { useFrameworkReady } from '@/hooks/useFrameworkReady';
-import { AuthProvider } from '@/context/AuthContext';
+import { useEffect } from "react";
+
+import { Stack } from "expo-router";
+import * as SplashScreen from "expo-splash-screen";
+
+import { useSupabase } from "@/hooks/useSupabase";
+import { SupabaseProvider } from "@/providers/supabase-provider";
+
+SplashScreen.setOptions({
+  duration: 500,
+  fade: true,
+});
+
+SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  useFrameworkReady();
+  return (
+    <SupabaseProvider>
+      <RootNavigator />
+    </SupabaseProvider>
+  );
+}
+
+function RootNavigator() {
+  const { isLoaded, session } = useSupabase();
+
+  useEffect(() => {
+    if (isLoaded) {
+      SplashScreen.hide();
+    }
+  }, [isLoaded]);
 
   return (
-    <AuthProvider>
-      <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="index" />
-        <Stack.Screen name="auth/login" />
-        <Stack.Screen name="auth/signup" />
-        <Stack.Screen name="(tabs)" />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
-    </AuthProvider>
+    <Stack
+      screenOptions={{
+        headerShown: false,
+        gestureEnabled: false,
+        animation: "none",
+        animationDuration: 0,
+      }}
+    >
+      <Stack.Protected guard={!!session}>
+        <Stack.Screen name="(protected)" />
+      </Stack.Protected>
+
+      <Stack.Protected guard={!session}>
+        <Stack.Screen name="(public)" />
+      </Stack.Protected>
+    </Stack>
   );
 }
