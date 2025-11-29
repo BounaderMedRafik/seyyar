@@ -4,29 +4,27 @@
     "slug": "seyyar",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/logo.png",
-    "scheme": "seyyar",
+    "icon": "./assets/images/logo-no-rounds.png",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
-    "platforms": ["ios", "android"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.flemingvincent.expo-supabase-starter"
+      "bundleIdentifier": "com.seyyar.app"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/logo.png",
+        "foregroundImage": "./assets/images/logo-no-rounds.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true,
-      "package": "com.flemingvincent.exposupabasestarter"
+      "package": "com.seyyar.app",
+      "versionCode": 1
     },
     "plugins": [
       "expo-router",
       [
         "expo-splash-screen",
         {
-          "image": "./images/logo.png",
+          "image": "./assets/images/logo-no-rounds.png",
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
@@ -34,8 +32,13 @@
       ]
     ],
     "experiments": {
-      "typedRoutes": true,
-      "reactCompiler": true
+      "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "0fb7674a-b7f5-442f-87e2-05bf32a305f0"
+      }
     }
   }
 }
