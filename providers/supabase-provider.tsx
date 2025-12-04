@@ -11,8 +11,9 @@ interface SupabaseProviderProps {
 }
 
 export const SupabaseProvider = ({ children }: SupabaseProviderProps) => {
-  const supabaseUrl = process.env.EXPO_PUBLIC_SUPABASE_URL!;
-  const supabaseKey = process.env.EXPO_PUBLIC_SUPABASE_KEY!;
+  const supabaseUrl = "https://qzxqglmhmqhxkzyuotyy.supabase.co";
+  const supabaseKey =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF6eHFnbG1obXFoeGt6eXVvdHl5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMzMzEwODUsImV4cCI6MjA3ODkwNzA4NX0.tvFy8lhXWIwSPJ2htGxFEbtKhFlZ4VopuT5ambI_T3Y";
 
   const supabase = useMemo(
     () =>
@@ -25,7 +26,7 @@ export const SupabaseProvider = ({ children }: SupabaseProviderProps) => {
           lock: processLock,
         },
       }),
-    [supabaseUrl, supabaseKey],
+    [supabaseUrl, supabaseKey]
   );
 
   useEffect(() => {
